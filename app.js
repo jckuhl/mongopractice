@@ -1,17 +1,16 @@
 const get = async (url, params={})=> (await fetch(url, params)).json();
-const post = async (url, params={})=> (await fetch(url, params));
+const post = (url, params={})=> fetch(url, params);
 
 const ul = document.getElementById('ul');
 
 function constructList(object) {
-    console.log(object);
-    li = document.createElement('li');
+    const li = document.createElement('li');
     for(let prop in object) {
         if(object.hasOwnProperty(prop) && prop !== '_id') {
             li.innerHTML += object[prop] + ' ';
-            ul.appendChild(li);
         }
     }
+    li.innerHTML.trim();
     ul.appendChild(li);
 }
 
