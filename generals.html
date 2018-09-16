@@ -20,6 +20,42 @@
         </select>
         <button id="submit" type="submit">Submit</button>
     </form>
+
+    <h2>Find a General!</h2>
+
+    <form>
+        <label for="sname">Name</label>
+        <input type="text" name="sname" id="sname">
+        <label for="sside">Side: </label>
+        <select name="sside" id="sside">
+            <option value="Union">Union</option>
+            <option value="Confederate">Confederate</option>
+        </select>
+        <button id="search">Search</button>
+    </form>
+
+    <h4>Result:</h4>
+    <ul id="result"></ul>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Side</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <td><button>Refresh</button></td>
+            </tr>
+        </tfoot>
+    </table>
+     
     <script src="app.js"></script>
 </body>
 </html>
