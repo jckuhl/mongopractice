@@ -29,6 +29,9 @@ function read(query={}) {
     }).then(client => {
         return new Promise((resolve, reject)=> {
             const collection = client.db('first-test').collection('users');
+            if(query) {
+                query.name = new RegExp(query.name);
+            }
             collection.find(query).toArray((err, generals)=> {
                 if(err) {
                     reject(err);
@@ -64,6 +67,20 @@ function remove(id) {
     });
 }
 
+// Updates a general with the given id . . . but how . . . ?
+function update(general, query) {
+    MongoClient.connect(uri, { useNewUrlParser: true }, function(err, client) {
+        const collection = client.db("first-test").collection("users");
+        collection.updateOne(general, query, (error, doc)=> {
+            console.log(doc);
+            if(error) {
+                response.sendStatus(500);
+            }
+        });
+        client.close();
+    });
+}
+
 // Middle ware, CORS and body-parser
 app.use(cors());
 app.use(bodyParser.json());
@@ -75,6 +92,7 @@ app.get('/generals', (request, response)=> {
     });
 });
 
+// Search the generals using the provided query string
 app.get('/generals/search', (request, response)=> {
     read(request.query).then(data => {
         response.send(JSON.stringify(data));
@@ -96,6 +114,22 @@ app.delete('/generals/delete', (request, response)=> {
     }
 
     remove(query);
+    response.sendStatus(200);
+});
+
+// Set the /generals/update route for PUT requests to update data
+app.put('/generals/update', (request, response)=> {
+    const mongoFilter = {
+        name: request.query.oname,
+        side: request.query.oside
+    };
+    const mongoQuery = {
+        '$set': {
+            name: request.query.name,
+            side: request.query.side
+        }
+    };
+    update(mongoFilter, mongoQuery);
     response.sendStatus(200);
 });
 

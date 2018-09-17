@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Mongo Practice with CRUD</title>
 </head>
 <body>
     <h1>Civil War Generals:</h1>
@@ -28,6 +28,7 @@
         <input type="text" name="sname" id="sname">
         <label for="sside">Side: </label>
         <select name="sside" id="sside">
+            <option value="null">None</option>
             <option value="Union">Union</option>
             <option value="Confederate">Confederate</option>
         </select>
@@ -51,10 +52,22 @@
         </tbody>
         <tfoot>
             <tr>
-                <td><button>Refresh</button></td>
+                <td><button id="refresh">Refresh</button></td>
             </tr>
         </tfoot>
     </table>
+
+    <h3>Update</h3>
+
+    <form>
+        <label for="uname">Name: </label>
+        <input type="text" name="uname" id="uname" readonly>
+
+        <label for="uside">Side: </label>
+        <input type="text" name="uside" id="uside" readonly>
+
+        <button id="update" disabled>Update!</button>
+    </form>
      
     <script src="app.js"></script>
 </body>
